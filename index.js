@@ -19,31 +19,14 @@ app.get('/', (req, res) => {
 
 
 // new user joined
-io.on('add user', (socket) => {
-    // hi to everyone except new join
-    socket.broadcast.emit('chat message', 'Someone joined')
-    // not working yet - 
-    socket.on('disconnecting', (msg) => {
-        io.emit('chat message', 'someone left ._.')
+io.on('connection', (socket) => {
+    // 
+    console.log("new user");
+    socket.on('chat message', (socket) => {
+        // console.log("new text from client: ", socket.msg);
+        io.emit('chat message', { msg: socket.msg })
     })
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-
-    console.log(socket.username, ' joined room: ', socket.room);
-    // new message
-    socket.on('chat message', (msg) => {
-        // console.log('message: ' + msg);
-        io.emit('chat message', msg);
-    });
-});
-
-
-
-io.on('connection', (socket) => {
-    socket.broadcast.emit('chat message', 'Someone joined')
-    console.log('new user detected');
 })
 
 

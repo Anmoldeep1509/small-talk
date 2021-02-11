@@ -5,22 +5,6 @@ const $user_id = document.getElementById("user-id");
 const $room_name = document.getElementById("room-name");
 
 
-// socket 
-const socket = io();
-
-var msg_form = document.getElementById('msg-form');
-var msg_input = document.getElementById('msg-input');
-
-
-// send message action
-msg_form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (msg_input.value) {
-        socket.emit('chat message', msg_input.value);
-        msg_input.value = '';
-    }
-});
-
 // join button action
 const join_btn = document
     .getElementById("join-btn") || 0;
@@ -35,6 +19,22 @@ if (join_btn) {
         setUsername();
     });
 }
+
+// socket 
+const socket = io();
+
+var msg_form = document.getElementById('msg-form');
+var msg_input = document.getElementById('msg-input');
+
+
+// send message action
+msg_form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (msg_input.value) {
+        socket.emit('chat message', { msg: msg_input.value });
+        msg_input.value = '';
+    }
+});
 
 
 
@@ -51,15 +51,19 @@ const setUsername = () => {
 
 
 // events handlers
-
-socket.on('chat message', (msg) => {
+socket.on('chat message', (arg) => {
     // console.log('new mesage detected');
-    const messages = document.getElementById('messages')
-    var new_msg = document.createElement('li')
-    // console.log(messages);
-    new_msg.className = 'list-group-item'
-    new_msg.textContent = msg
+    if (arg.msg) {
 
-    messages.appendChild(new_msg)
-    window.scrollTo(0, document.body.scrollHeight)
+        const messages = document.getElementById('messages')
+        var new_msg = document.createElement('li')
+        // console.log(messages);
+        new_msg.className = 'list-group-item'
+        new_msg.textContent = arg.msg
+
+        messages.appendChild(new_msg)
+        window.scrollTo(0, document.body.scrollHeight)
+    } else {
+        console.log("new message event received without message body");
+    }
 })

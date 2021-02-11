@@ -22,9 +22,14 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     // 
     console.log("new user");
+    // io.emit('chat message', '')
+
+    socket.on('add user', (user) => {
+        io.emit('user added', { user: user.username })
+    })
     socket.on('chat message', (socket) => {
         // console.log("new text from client: ", socket.msg);
-        io.emit('chat message', { msg: socket.msg })
+        io.emit('chat message', { msg: socket.msg, user: socket.user })
     })
 
 })

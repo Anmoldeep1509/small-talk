@@ -5,11 +5,13 @@
 ## Doing
 
 - [ ] change action listener from button to form - for login box.
-- [ ] add 'user added' event from server.
 - [ ] then append 'you joined' to messages.
-- [ ] give some style to message input and send button.
-- [ ] give a heading.
-- [ ] implement user joining, user message send.
+- [ ] change socket connection to post login
+- [ ] implement disconnect event - user left
+- [x] add 'user added' event from server.
+- [x] give some style to message input and send button.
+- [x] give a heading.
+- [x] implement user joining, user message send.
 
 ## Features due
 

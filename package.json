@@ -1,0 +1,24 @@
+{
+  "name": "small-talk",
+  "version": "1.0.0",
+  "description": "Simple Chat App for small talks!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anmoldeep1509/small-talk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anmoldeep1509/small-talk/issues"
+  },
+  "homepage": "https://github.com/Anmoldeep1509/small-talk#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.1"
+  }
+}
